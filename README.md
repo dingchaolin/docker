@@ -26,8 +26,46 @@
 
 #### 2.1 简单的服务
 
-https://hub.docker.com/_/node/
-https://hub.daocloud.io/repos/6564230d-84b5-4789-90f9-98c298ab071b
+
+
+## 3. Dockfile 参数
+
+### 3.1 FROM 
+
+#### 3.1.1 原生 https://hub.docker.com/_/node/
+- node镜像列表: https://hub.docker.com/_/node/  需要翻墙
+- 写法  FROM node:9.11.1-jessie
+- 列表:
+```
+Supported tags and respective Dockerfile links
+9.11.1-jessie, 9.11-jessie, 9-jessie, 9.11.1, 9.11, 9 (9/jessie/Dockerfile)
+9.11.1-alpine, 9.11-alpine, 9-alpine (9/alpine/Dockerfile)
+9.11.1-onbuild, 9.11-onbuild, 9-onbuild (9/onbuild/Dockerfile)
+9.11.1-slim, 9.11-slim, 9-slim (9/slim/Dockerfile)
+9.11.1-stretch, 9.11-stretch, 9-stretch (9/stretch/Dockerfile)
+8.11.2-jessie, 8.11-jessie, 8-jessie, carbon-jessie, 8.11.2, 8.11, 8, carbon (8/jessie/Dockerfile)
+8.11.2-alpine, 8.11-alpine, 8-alpine, carbon-alpine (8/alpine/Dockerfile)
+8.11.2-onbuild, 8.11-onbuild, 8-onbuild, carbon-onbuild (8/onbuild/Dockerfile)
+8.11.2-slim, 8.11-slim, 8-slim, carbon-slim (8/slim/Dockerfile)
+8.11.2-stretch, 8.11-stretch, 8-stretch, carbon-stretch (8/stretch/Dockerfile)
+6.14.2-jessie, 6.14-jessie, 6-jessie, boron-jessie, 6.14.2, 6.14, 6, boron (6/jessie/Dockerfile)
+6.14.2-alpine, 6.14-alpine, 6-alpine, boron-alpine (6/alpine/Dockerfile)
+6.14.2-onbuild, 6.14-onbuild, 6-onbuild, boron-onbuild (6/onbuild/Dockerfile)
+6.14.2-slim, 6.14-slim, 6-slim, boron-slim (6/slim/Dockerfile)
+6.14.2-stretch, 6.14-stretch, 6-stretch, boron-stretch (6/stretch/Dockerfile)
+10.4.0-jessie, 10.4-jessie, 10-jessie, jessie, 10.4.0, 10.4, 10, latest (10/jessie/Dockerfile)
+10.4.0-alpine, 10.4-alpine, 10-alpine, alpine (10/alpine/Dockerfile)
+10.4.0-slim, 10.4-slim, 10-slim, slim (10/slim/Dockerfile)
+10.4.0-stretch, 10.4-stretch, 10-stretch, stretch (10/stretch/Dockerfile)
+chakracore-8.11.1, chakracore-8.11, chakracore-8 (chakracore/8/Dockerfile)
+chakracore-10.1.0, chakracore-10.1, chakracore-10, chakracore (chakracore/10/Dockerfile)
+```
+#### 3.1.2 国内代理 https://hub.daocloud.io/repos/6564230d-84b5-4789-90f9-98c298ab071b
+- https://hub.daocloud.io/repos/6564230d-84b5-4789-90f9-98c298ab071b  不用翻墙
+- 写法 FROM daocloud.io/node:8.4.0-onbuild
+- 列表 最新 8.4.0-onbuild
+- 地址 daocloud.io/library/node
+- 拉取镜像 docker pull daocloud.io/library/node:8.4.0-onbuild
 
 
 
