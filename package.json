@@ -1,28 +1,22 @@
 {
-  "name": "statusbar",
+  "name": "docker",
   "version": "1.0.0",
-  "description": "status & process bar for markdown",
+  "description": "## 1. 安装",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yanbingbing/statusbar.git"
+    "url": "git+https://github.com/dingchaolin/docker.git"
   },
-  "keywords": [
-    "status",
-    "process"
-  ],
-  "author": "onbing",
-  "license": "MIT",
+  "author": "",
+  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/yanbingbing/statusbar/issues"
+    "url": "https://github.com/dingchaolin/docker/issues"
   },
-  "homepage": "https://github.com/yanbingbing/statusbar#readme",
+  "homepage": "https://github.com/dingchaolin/docker#readme",
   "dependencies": {
-    "express": "~4.13.3",
-    "nodemon": "~1.8.1",
-    "string-width": "^1.0.1"
+    "express": "^4.16.3"
   }
 }

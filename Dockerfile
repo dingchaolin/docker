@@ -1,9 +1,5 @@
-# Statusbar
-#
-# VERSION               1.0.0
-
-FROM daocloud.io/node:5
-MAINTAINER me@yanbingbing.com
+FROM node:9.0.0
+MAINTAINER 18810042351@163.com
 
 ENV HTTP_PORT 8000
 
