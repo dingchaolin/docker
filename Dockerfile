@@ -1,4 +1,4 @@
-FROM node:9.11.1
+FROM daocloud.io/node:8.4.0-onbuild
 MAINTAINER 18810042351@163.com
 
 ENV HTTP_PORT 8000

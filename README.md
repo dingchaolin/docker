@@ -27,6 +27,7 @@
 #### 2.1 简单的服务
 
 https://hub.docker.com/_/node/
+https://hub.daocloud.io/repos/6564230d-84b5-4789-90f9-98c298ab071b
 
 
 
