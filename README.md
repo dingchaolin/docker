@@ -149,7 +149,7 @@ chakracore-10.1.0, chakracore-10.1, chakracore-10, chakracore (chakracore/10/Doc
 - 然后在 /app 目录中执行我们特别熟悉的 npm install，这里我们要用 RUN 指令来执行。
 
 ### 3.6 EXPOSE
-- 开放端口
+- 指定容器监听的端口
 - 作为一个服务，来让外部通过端口来访问，通过 EXPOSE 指令来指定端口号，很像我们的 module.exports
 - 此处端口应该和我们服务监听的端口保持一致
 
@@ -173,15 +173,44 @@ chakracore-10.1.0, chakracore-10.1, chakracore-10, chakracore (chakracore/10/Doc
 - docker rmi testimg  删除镜像  
 - docker rmi --force testimg 强制删除
 - docker run --name testcontainer [-d] -p 9999:9000 testimg 
+- docker run --name testcontainer  -p 8080:8080 -p 80:80  test02
 ```
 创建的容器名称是 testcontainer，可以理解为 pid，这个名称唯一，创建之后如果不删除会一直存在。
 -p 用来指定端口映射，将容器的端口9000映射到主机9999端口上，这样就可外部访问了。
+每一个-p可以映射一个端口
 -d 后台启动
 ```
 - 停止容器 docker stop testcontainer  
 - 重启容器 docker restart testcontainer  
 - 删除容器 docker rm testcontainer  
 
+### run 的可选项
+```
+-a stdin: 指定标准输入输出内容类型，可选 STDIN/STDOUT/STDERR 三项；
+-d: 后台运行容器，并返回容器ID；
+-i: 以交互模式运行容器，通常与 -t 同时使用；
+-t: 为容器重新分配一个伪输入终端，通常与 -i 同时使用；
+--name="nginx-lb": 为容器指定一个名称；
+--dns 8.8.8.8: 指定容器使用的DNS服务器，默认和宿主一致；
+--dns-search example.com: 指定容器DNS搜索域名，默认和宿主一致；
+-h "mars": 指定容器的hostname；
+-e username="ritchie": 设置环境变量；
+--env-file=[]: 从指定文件读入环境变量；
+--cpuset="0-2" or --cpuset="0,1,2": 绑定容器到指定CPU运行；
+-m :设置容器使用内存最大值；
+--net="bridge": 指定容器的网络连接类型，支持 bridge/host/none/container: 四种类型；
+--link=[]: 添加链接到另一个容器；
+--expose=[]: 开放一个端口或一组端口；
+```
+
+## 7. 关于多个容器映射到同一端口(未找到比较好的办法)
+- 方式1 : 未验证
+```
+The best, easiest option, is to configure the host operating system with "IP Aliasing", what means adding multiple IP addresses to a single network interface.
+
+Then you configure each Docker container attaching to a different IP address of the host OS. That way they all Docker containers can run on the same port.
+```
+- 方式2 : nginx
 
 
 
