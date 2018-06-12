@@ -2,7 +2,7 @@
 #
 # VERSION               1.0.0
 
-FROM daocloud.io/node:8.4.0-onbuild
+FROM daocloud.io/node:5
 
 ENV HTTP_PORT 9000
 
