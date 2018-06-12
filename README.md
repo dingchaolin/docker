@@ -87,8 +87,8 @@ CMD ["npm", "start"]
 
 ### 3.1 FROM 
 - 基础镜像
-- FROM <image>:<tag>  
-- FROM <image>  
+- FROM  image : tag  
+- FROM  image  
 - daocloud.io/node:5 和 node:5 其实是同一个image，出于速度考虑选择 daocloud.io/node:5
 
 #### 3.1.1 原生 https://hub.docker.com/_/node/
@@ -129,13 +129,13 @@ chakracore-10.1.0, chakracore-10.1, chakracore-10, chakracore (chakracore/10/Doc
 
 ### 3.2 ENV
 - ENV 指令用来设定一个环境变量，会被后续 RUN 指令使用，并在容器运行时保持。
-- 格式： ENV <KEY> <value>  
+- 格式： ENV KEY value  
 - 可以看到之前js文件有用到 process.env.HTTP_PORT，就是在这里设定的。
 
 ### 3.3 COPY
 - 拷贝项目文件
 - COPY 指令用来复制本地主机的文件到容器中
-- 格式: COPY <src> <dest> 
+- 格式: COPY src dest 
 - COPY . /app
 ```
 这里把我们项目目录本身，即当前目录 . 拷贝至容器的 /app 位置。然后通过指令 WORKDIR 将 /app 目录设为工作目录。工作目录可以理解为运行时的 pwd。
