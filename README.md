@@ -26,11 +26,70 @@
 
 #### 2.1 简单的服务
 
+- index.js
+```
+const express = require('express');
+
+const app = express();
+
+const server = require('http').createServer(app);
+
+app.get('/', function (req, res) {
+    res.end("hello, docker + nodejs");
+});
+
+app.get('/welcome', function (req, res) {
+    res.end("hello, world!");
+});
+
+let port = process.env.HTTP_PORT || 9000;
+
+server.listen(port);
+
+console.log('Listening on port %s', port);
+```
+
+- .dockerignore
+```
+     node_modules/
+     .git
+     .gitignore
+     .idea
+     .DS_Store
+     *.swp
+     *.log
+```
+
+- .gitignore
+- package.json
+- Dockerfile
+```
+# docker_nodejs
+#
+# VERSION               1.0.0
+
+FROM daocloud.io/node:5
+
+ENV HTTP_PORT 9000
+
+COPY . /app
+WORKDIR /app
+
+RUN npm --registry=https://registry.npm.taobao.org --disturl=https://npm.taobao.org/mirrors/node install
+
+EXPOSE 9000
+
+CMD ["npm", "start"]
+```
 
 
 ## 3. Dockfile 参数
 
 ### 3.1 FROM 
+- 基础镜像
+- FROM <image>:<tag>  
+- FROM <image>  
+- daocloud.io/node:5 和 node:5 其实是同一个image，出于速度考虑选择 daocloud.io/node:5
 
 #### 3.1.1 原生 https://hub.docker.com/_/node/
 - node镜像列表: https://hub.docker.com/_/node/  需要翻墙
@@ -62,10 +121,66 @@ chakracore-10.1.0, chakracore-10.1, chakracore-10, chakracore (chakracore/10/Doc
 ```
 #### 3.1.2 国内代理 https://hub.daocloud.io/repos/6564230d-84b5-4789-90f9-98c298ab071b
 - https://hub.daocloud.io/repos/6564230d-84b5-4789-90f9-98c298ab071b  不用翻墙
-- 写法 FROM daocloud.io/node:8.4.0-onbuild
-- 列表 最新 8.4.0-onbuild
+- 写法 FROM daocloud.io/node:8.4.0-onbuild    
+- 列表 最新 8.4.0-onbuild   8.7-alpine
 - 地址 daocloud.io/library/node
 - 拉取镜像 docker pull daocloud.io/library/node:8.4.0-onbuild
+- **使用 8.4.0-onbuild   8.7-alpine 生成镜像一直无法成功  使用node:5能正常生成**
+
+### 3.2 ENV
+- ENV 指令用来设定一个环境变量，会被后续 RUN 指令使用，并在容器运行时保持。
+- 格式： ENV <KEY> <value>  
+- 可以看到之前js文件有用到 process.env.HTTP_PORT，就是在这里设定的。
+
+### 3.3 COPY
+- 拷贝项目文件
+- COPY 指令用来复制本地主机的文件到容器中
+- 格式: COPY <src> <dest> 
+- COPY . /app
+```
+这里把我们项目目录本身，即当前目录 . 拷贝至容器的 /app 位置。然后通过指令 WORKDIR 将 /app 目录设为工作目录。工作目录可以理解为运行时的 pwd。
+
+``` 
+
+### 3.4 WORKDIR 
+- 设置工作目录。工作目录可以理解为运行时的 pwd。
+
+### 3.5 RUN
+- 然后在 /app 目录中执行我们特别熟悉的 npm install，这里我们要用 RUN 指令来执行。
+
+### 3.6 EXPOSE
+- 开放端口
+- 作为一个服务，来让外部通过端口来访问，通过 EXPOSE 指令来指定端口号，很像我们的 module.exports
+- 此处端口应该和我们服务监听的端口保持一致
+
+
+### 3.7 CMD
+- 当这个容器运行的时候，如何启动这个服务。我们 npm start 就可以了，因为我们在 package.json 中设置了 scripts.start。
+
+## 4. 生成镜像
+- git clone https://github.com/dingchaolin/docker-nodejs.git  test
+- cd test
+- docker build -t testimg .
+- 会生成一个名字为 testimg 的镜像
+
+## 5. 启动镜像
+- docker run -name testcontainer -p 9999:9000 testimg
+- 启动之后就能在可以访问该服务了  192.168.XXX.XXX:9999/
+
+## 6. docker 命令相关
+- docker images  查看本地所有的镜像
+- docker ps  查看本地所有docker启动的镜像服务
+- docker rmi testimg  删除镜像  
+- docker rmi --force testimg 强制删除
+- docker run --name testcontainer [-d] -p 9999:9000 testimg 
+```
+创建的容器名称是 testcontainer，可以理解为 pid，这个名称唯一，创建之后如果不删除会一直存在。
+-p 用来指定端口映射，将容器的端口9000映射到主机9999端口上，这样就可外部访问了。
+-d 后台启动
+```
+- 停止容器 docker stop testcontainer  
+- 重启容器 docker restart testcontainer  
+- 删除容器 docker rm testcontainer  
 
 
 
