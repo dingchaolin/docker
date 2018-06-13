@@ -127,6 +127,8 @@ chakracore-10.1.0, chakracore-10.1, chakracore-10, chakracore (chakracore/10/Doc
 - 拉取镜像 docker pull daocloud.io/library/node:8.4.0-onbuild
 - **使用 8.4.0-onbuild   8.7-alpine 生成镜像一直无法成功  使用node:5能正常生成**
 
+#### 3.1.3 http://docker.mirrors.ustc.edu.cn
+
 ### 3.2 ENV
 - ENV 指令用来设定一个环境变量，会被后续 RUN 指令使用，并在容器运行时保持。
 - 格式： ENV KEY value  
